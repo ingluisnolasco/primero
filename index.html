@@ -26,7 +26,7 @@
     <iframe src="https://drive.google.com/file/d/11u_rtIykgYlg1vBwo5kKf2LsOov-LVZO/preview"></iframe>
 </body>
 
-</html-->
+</html>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -317,6 +317,468 @@
             contenedor.appendChild(div);
         });
     </script>
+</body>
+
+</html-->
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Regla de Tres</title>
+
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            /* Alinea al inicio para que el contenido no se pegue al centro de la pantalla si es corto */
+            min-height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            /* Incluye padding en el ancho total */
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1,
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .input-section p,
+        .proportionality-section p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 15px;
+            gap: 15px;
+            /* Espacio entre los inputs */
+        }
+
+        .input-group input[type="number"] {
+            width: 48%;
+            /* Casi la mitad, dejando espacio para el gap */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            text-align: center;
+        }
+
+        .proportionality-section label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1em;
+            color: #444;
+        }
+
+        .proportionality-section input[type="radio"] {
+            margin-right: 8px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .results-section {
+            text-align: left;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        #steps p {
+            font-size: 1.1em;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        #result {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #28a745;
+            /* Color verde para el resultado */
+            text-align: center;
+        }
+
+        /* Estilos para las tablas de fracciones */
+        .math-fraction-container {
+            display: flex;
+            /* Para alinear las tablas y los signos de igual horizontalmente */
+            align-items: center;
+            /* Centrar verticalmente */
+            margin-top: 15px;
+            margin-bottom: 15px;
+            overflow-x: auto;
+            /* Para desplazar si la expresión es muy larga */
+            white-space: nowrap;
+            /* Evitar saltos de línea */
+            justify-content: center;
+            /* Centrar el bloque de pasos horizontalmente */
+            font-family: Arial, sans-serif;
+            /* Fuente legible para matemáticas */
+        }
+
+        .math-fraction-table {
+            border-collapse: collapse;
+            /* Eliminar el espacio entre las celdas del borde */
+            display: inline-block;
+            /* Para que actúe como un elemento en línea dentro del flex */
+            vertical-align: middle;
+            /* Para alinear mejor con el signo de igual */
+            margin: 0 5px;
+            /* Espacio entre tablas y signos de igual */
+        }
+
+        .math-fraction-table .num,
+        .math-fraction-table .den {
+            padding: 5px 10px;
+            text-align: center;
+            font-size: 1.2em;
+            /* Hace los números de la fracción más grandes */
+            font-weight: bold;
+        }
+
+        .math-fraction-table .line {
+            border-bottom: 2px solid black;
+            /* La línea divisoria de la fracción */
+            height: 0;
+            /* Para que no ocupe espacio vertical */
+            line-height: 0;
+            font-size: 0;
+            /* Para que no afecte el tamaño del texto */
+        }
+
+        .math-equals-sign {
+            font-size: 2em;
+            /* Tamaño del signo de igual */
+            padding: 0 10px;
+            font-weight: bold;
+        }
+
+        /* Estilo para la etiqueta <del> */
+        del {
+            color: #d00;
+            /* Un color rojo para el tachado */
+            text-decoration: line-through;
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.1/math.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const aInput = document.getElementById('a');
+            const bInput = document.getElementById('b');
+            const cInput = document.getElementById('c');
+            const dInput = document.getElementById('d');
+            const calculateBtn = document.getElementById('calculateBtn');
+            const stepsDiv = document.getElementById('steps');
+            const resultP = document.getElementById('result');
+
+            // Función para generar una fracción como tabla HTML
+            function createFractionTableHtml(numeratorContent, denominatorContent) {
+                return `
+                    <table class="math-fraction-table">
+                        <tr>
+                            <td class="num">${numeratorContent}</td>
+                        </tr>
+                        <tr>
+                            <td class="line"></td>
+                        </tr>
+                        <tr>
+                            <td class="den">${denominatorContent}</td>
+                        </tr>
+                    </table>
+                `;
+            }
+
+            // Función para obtener el HTML de un signo de igualdad centrado
+            function createEqualsSignHtml() {
+                return `<span class="math-equals-sign">=</span>`;
+            }
+
+            // Función para simplificar una fracción y generar su HTML con tachado si aplica
+            function getSimplifiedFractionHtml(numerator, denominator, initialNumerator, initialDenominator) {
+                let currentNum = initialNumerator;
+                let currentDen = initialDenominator;
+                let html = '';
+
+                // Paso 1: Simplificar ceros finales y generar HTML con <del>
+                let numStr = String(currentNum);
+                let denStr = String(currentDen);
+                let commonTrailingZeros = 0;
+
+                // Bucle para contar y "tachar" ceros finales
+                while (numStr.length > 0 && denStr.length > 0 && numStr.endsWith('0') && denStr.endsWith('0')) {
+                    commonTrailingZeros++;
+                    // Eliminamos el último cero para la siguiente iteración
+                    numStr = numStr.slice(0, -1);
+                    denStr = denStr.slice(0, -1);
+                }
+
+                if (commonTrailingZeros > 0) {
+                    // Reconstruir los números originales con la etiqueta <del>
+                    let originalNumWithDel = String(initialNumerator);
+                    let originalDenWithDel = String(initialDenominator);
+
+                    // Envolver los ceros finales en <del>
+                    originalNumWithDel = originalNumWithDel.substring(0, originalNumWithDel.length - commonTrailingZeros) +
+                        '<del>' + originalNumWithDel.substring(originalNumWithDel.length - commonTrailingZeros) + '</del>';
+                    originalDenWithDel = originalDenWithDel.substring(0, originalDenWithDel.length - commonTrailingZeros) +
+                        '<del>' + originalDenWithDel.substring(originalDenWithDel.length - commonTrailingZeros) + '</del>';
+
+                    // Los números simplificados por ceros
+                    currentNum = initialNumerator / Math.pow(10, commonTrailingZeros);
+                    currentDen = initialDenominator / Math.pow(10, commonTrailingZeros);
+
+                    html += createEqualsSignHtml();
+                    html += createFractionTableHtml(originalNumWithDel, originalDenWithDel);
+                    html += createEqualsSignHtml();
+                    html += createFractionTableHtml(currentNum, currentDen);
+                }
+
+                // Paso 2: Simplificar por MCD si es necesario (después de la simplificación de ceros)
+                const commonDivisor = math.gcd(currentNum, currentDen);
+                if (commonDivisor > 1) {
+                    const finalNum = currentNum / commonDivisor;
+                    const finalDen = currentDen / commonDivisor;
+
+                    html += createEqualsSignHtml();
+                    html += createFractionTableHtml(finalNum, finalDen);
+                    currentNum = finalNum;
+                    currentDen = finalDen;
+                }
+
+                return { html: html, currentNum: currentNum, currentDen: currentDen };
+            }
+
+
+            calculateBtn.addEventListener('click', () => {
+                let a = parseFloat(aInput.value);
+                let b = parseFloat(bInput.value);
+                let c = parseFloat(cInput.value);
+                let d_val = dInput.value;
+
+                const proportionality = document.querySelector('input[name="proportionality"]:checked').value;
+
+                stepsDiv.innerHTML = '';
+                resultP.textContent = '';
+
+                let unknownVar = '';
+                let knownCount = 0;
+
+                if (!isNaN(a)) knownCount++; else unknownVar = 'a';
+                if (!isNaN(b)) knownCount++; else unknownVar = 'b';
+                if (!isNaN(c)) knownCount++; else unknownVar = 'c';
+                if (d_val !== '' && !isNaN(parseFloat(d_val))) knownCount++; else unknownVar = 'd';
+
+                if (knownCount !== 3) {
+                    stepsDiv.innerHTML = '<p style="color: red;">Por favor, ingresa exactamente tres valores conocidos y deja uno en blanco para el desconocido.</p>';
+                    return;
+                }
+
+                let calculatedResult;
+                let stepsArray = [];
+                let productNumerator;
+                let divisorDenominator;
+                let factor1, factor2;
+
+                const displayA = (unknownVar === 'a') ? 'x' : a;
+                const displayB = (unknownVar === 'b') ? 'x' : b;
+                const displayC = (unknownVar === 'c') ? 'x' : c;
+                const displayD = (unknownVar === 'd') ? 'x' : parseFloat(d_val);
+
+                stepsArray.push(`<h2>${proportionality === 'direct' ? 'Proporcionalidad Directa' : 'Proporcionalidad Inversa'}</h2>`);
+                stepsArray.push(`<p>Valores dados: a=${displayA}, b=${displayB}, c=${displayC}, d=${displayD}</p>`);
+
+                if (proportionality === 'direct') {
+                    stepsArray.push(`<p>Para la proporcionalidad directa, la relación es a/b = c/d.</p>`);
+                    stepsArray.push(`<p>Para encontrar el valor de x, <b>multiplicamos los dos valores conocidos en diagonal y dividimos por el valor que está en la misma línea que x</b>.</p>`);
+
+                    if (unknownVar === 'd') {
+                        if (a === 0) {
+                            stepsDiv.innerHTML = '<p style="color: red;">Error: La división por cero no está permitida para calcular x.</p>';
+                            return;
+                        }
+                        factor1 = b; factor2 = c;
+                        productNumerator = b * c;
+                        divisorDenominator = a;
+                    } else if (unknownVar === 'a') {
+                        let d = parseFloat(d_val);
+                        if (d === 0) {
+                            stepsDiv.innerHTML = '<p style="color: red;">Error: La división por cero no está permitida para calcular x.</p>';
+                            return;
+                        }
+                        factor1 = b; factor2 = c;
+                        productNumerator = b * c;
+                        divisorDenominator = d;
+                    } else if (unknownVar === 'b') {
+                        let d = parseFloat(d_val);
+                        if (c === 0) {
+                            stepsDiv.innerHTML = '<p style="color: red;">Error: La división por cero no está permitida para calcular x.</p>';
+                            return;
+                        }
+                        factor1 = a; factor2 = d;
+                        productNumerator = a * d;
+                        divisorDenominator = c;
+                    } else if (unknownVar === 'c') {
+                        let d = parseFloat(d_val);
+                        if (b === 0) {
+                            stepsDiv.innerHTML = '<p style="color: red;">Error: La división por cero no está permitida para calcular x.</p>';
+                            return;
+                        }
+                        factor1 = a; factor2 = d;
+                        productNumerator = a * d;
+                        divisorDenominator = b;
+                    }
+
+                } else if (proportionality === 'inverse') {
+                    stepsArray.push(`<p>Para la proporcionalidad inversa, la relación es a ⋅ b = c ⋅ d.</p>`);
+                    stepsArray.push(`<p>Para encontrar el valor de x, <b>multiplicamos los dos valores conocidos que están en la misma línea y dividimos por el valor restante</b>.</p>`);
+
+                    if (unknownVar === 'd') {
+                        if (c === 0) {
+                            stepsDiv.innerHTML = '<p style="color: red;">Error: La división por cero no está permitida para calcular x.</p>';
+                            return;
+                        }
+                        factor1 = a; factor2 = b;
+                        productNumerator = a * b;
+                        divisorDenominator = c;
+                    } else if (unknownVar === 'a') {
+                        let d = parseFloat(d_val);
+                        if (b === 0) {
+                            stepsDiv.innerHTML = '<p style="color: red;">Error: La división por cero no está permitida para calcular x.</p>';
+                            return;
+                        }
+                        factor1 = c; factor2 = d;
+                        productNumerator = c * d;
+                        divisorDenominator = b;
+                    } else if (unknownVar === 'b') {
+                        let d = parseFloat(d_val);
+                        if (a === 0) {
+                            stepsDiv.innerHTML = '<p style="color: red;">Error: La división por cero no está permitida para calcular x.</p>';
+                            return;
+                        }
+                        factor1 = c; factor2 = d;
+                        productNumerator = c * d;
+                        divisorDenominator = a;
+                    } else if (unknownVar === 'c') {
+                        let d = parseFloat(d_val);
+                        if (d === 0) {
+                            stepsDiv.innerHTML = '<p style="color: red;">Error: La división por cero no está permitida para calcular x.</p>';
+                            return;
+                        }
+                        factor1 = a; factor2 = b;
+                        productNumerator = a * b;
+                        divisorDenominator = d;
+                    }
+                }
+
+                calculatedResult = productNumerator / divisorDenominator;
+
+                stepsArray.push(`<p>Primero, multiplicamos los valores correspondientes:</p>`);
+                stepsArray.push(`<p>${factor1} &times; ${factor2} = ${productNumerator}</p>`);
+
+                stepsArray.push(`<p>Luego, dividimos el producto entre el valor restante para encontrar x:</p>`);
+
+                let fractionHtmlSteps = `<div class="math-fraction-container">`;
+                fractionHtmlSteps += `<span>x =</span>`;
+
+                // Primera fracción: con la operación de multiplicación en el numerador
+                fractionHtmlSteps += createFractionTableHtml(`${factor1} &times; ${factor2}`, divisorDenominator);
+                fractionHtmlSteps += createEqualsSignHtml();
+
+                // Segunda fracción: con el resultado de la multiplicación en el numerador
+                fractionHtmlSteps += createFractionTableHtml(productNumerator, divisorDenominator);
+
+                // Simplificación de la fracción (con tachado si aplica)
+                const simplifiedResult = getSimplifiedFractionHtml(productNumerator, divisorDenominator, productNumerator, divisorDenominator);
+                fractionHtmlSteps += simplifiedResult.html;
+
+                // Resultado final
+                fractionHtmlSteps += createEqualsSignHtml();
+                fractionHtmlSteps += `<span>${parseFloat(calculatedResult.toFixed(4))}</span>`;
+                fractionHtmlSteps += `</div>`;
+
+                stepsArray.push(fractionHtmlSteps);
+
+                stepsDiv.innerHTML = stepsArray.join('');
+                resultP.textContent = `El valor desconocido (x) es aproximadamente: ${parseFloat(calculatedResult.toFixed(4))}`;
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Calculadora de Regla de Tres</h1>
+
+        <div class="input-section">
+            <p>Ingresa los valores conocidos para la regla de tres. Deja el valor desconocido en blanco.</p>
+            <div class="input-group">
+                <input type="number" id="a" placeholder="Valor A">
+                <input type="number" id="b" placeholder="Valor B">
+            </div>
+            <div class="input-group">
+                <input type="number" id="c" placeholder="Valor C">
+                <input type="number" id="d" placeholder="Valor X (desconocido)" readonly>
+            </div>
+        </div>
+
+        <div class="proportionality-section">
+            <p>Selecciona el tipo de proporcionalidad:</p>
+            <label>
+                <input type="radio" name="proportionality" value="direct" checked> Proporcionalidad Directa
+            </label>
+            <label>
+                <input type="radio" name="proportionality" value="inverse"> Proporcionalidad Inversa
+            </label>
+        </div>
+
+        <button id="calculateBtn">Calcular</button>
+
+        <div class="results-section">
+            <h2>Pasos del Cálculo:</h2>
+            <div id="steps"> </div>
+            <h2>Resultado:</h2>
+            <p id="result"></p>
+        </div>
+    </div>
 </body>
 
 </html>
