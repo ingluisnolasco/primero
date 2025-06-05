@@ -85,207 +85,70 @@
     </footer>
 
     <script>
+const problemas = [
+  { "problema": "Si 3 plátanos cuestan 15 pesos dominicanos, ¿cuánto costarán 10 plátanos?", "respuesta": "50 pesos dominicanos", "tipo": "proporcionalidad directa" },
+  { "problema": "Si 5 litros de gasolina cuestan 550 pesos dominicanos, ¿cuánto costarán 12 litros?", "respuesta": "1320 pesos dominicanos", "tipo": "proporcionalidad directa" },
+  { "problema": "Una guagua recorre 120 km con 8 galones de gasoil. ¿Cuánto recorrerá con 20 galones?", "respuesta": "300 km", "tipo": "proporcionalidad directa" },
+  { "problema": "Si 2 libras de yuca cuestan 60 pesos, ¿cuánto costarán 5 libras?", "respuesta": "150 pesos dominicanos", "tipo": "proporcionalidad directa" },
+  { "problema": "Un estudiante tarda 40 minutos en leer 20 páginas. ¿Cuánto tardará en leer 50 páginas?", "respuesta": "100 minutos", "tipo": "proporcionalidad directa" },
+  { "problema": "Una empleada doméstica gana 1,200 pesos por 2 días de trabajo. ¿Cuánto ganará por 5 días?", "respuesta": "3000 pesos dominicanos", "tipo": "proporcionalidad directa" },
+  { "problema": "Si 3 trabajadores pueden construir una casa en 12 días, ¿en cuántos días podrán construirla 6 trabajadores?", "respuesta": "6 días", "tipo": "proporcionalidad inversa" },
+  { "problema": "Si un camión puede transportar 10 toneladas de carga en 5 horas, ¿cuánto tiempo tardará en transportar 30 toneladas?", "respuesta": "15 horas", "tipo": "proporcionalidad directa" },
+  { "problema": "Si 5 personas pueden pintar una casa en 8 horas, ¿cuántas horas tardarán 20 personas en pintarla?", "respuesta": "2 horas", "tipo": "proporcionalidad inversa" },
+  { "problema": "Si un agricultor cosecha 120 kilos de tomate en 8 horas, ¿cuánto tiempo tardará en cosechar 240 kilos de tomate?", "respuesta": "16 horas", "tipo": "proporcionalidad directa" },
+  { "problema": "Si un vehículo viaja a 60 km/h y tarda 3 horas en llegar a su destino, ¿cuánto tardará si viaja a 90 km/h?", "respuesta": "2 horas", "tipo": "proporcionalidad inversa" },
+  { "problema": "Si 4 entradas para un concierto cuestan 8000 pesos dominicanos, ¿cuánto costarán 7 entradas?", "respuesta": "14000 pesos dominicanos", "tipo": "proporcionalidad directa" },
+  { "problema": "Un grifo llena un tanque de agua en 6 horas con un caudal de 10 litros por minuto. ¿Cuánto tardará si el caudal es de 15 litros por minuto?", "respuesta": "4 horas", "tipo": "proporcionalidad inversa" },
+  { "problema": "Si 1 kilogramo de arroz cuesta 70 pesos dominicanos, ¿cuánto costarán 3.5 kilogramos?", "respuesta": "245 pesos dominicanos", "tipo": "proporcionalidad directa" },
+  { "problema": "Si 15 obreros tardan 20 días en completar una obra, ¿cuántos días tardarán 10 obreros en hacer la misma obra?", "respuesta": "30 días", "tipo": "proporcionalidad inversa" },
+  { "problema": "Una impresora imprime 25 páginas en 5 minutos. ¿Cuántas páginas imprimirá en 12 minutos?", "respuesta": "60 páginas", "tipo": "proporcionalidad directa" },
+  { "problema": "Si 6 vacas producen 90 litros de leche al día, ¿cuántos litros producirán 10 vacas?", "respuesta": "150 litros", "tipo": "proporcionalidad directa" },
+  { "problema": "Si 8 personas pueden comer una pizza en 15 minutos, ¿cuánto tardarán 4 personas en comer la misma pizza?", "respuesta": "30 minutos", "tipo": "proporcionalidad inversa" },
+  { "problema": "Un sastre usa 2.5 metros de tela para hacer una camisa. ¿Cuántos metros necesitará para hacer 6 camisas?", "respuesta": "15 metros", "tipo": "proporcionalidad directa" },
+  { "problema": "Si 30 estudiantes pueden hacer un proyecto en 4 horas, ¿cuántas horas tardarán 20 estudiantes en hacer el mismo proyecto?", "respuesta": "6 horas", "tipo": "proporcionalidad inversa" },
+  { "problema": "Si una caja de 12 huevos cuesta 180 pesos dominicanos, ¿cuánto costarán 5 huevos?", "respuesta": "75 pesos dominicanos", "tipo": "proporcionalidad directa" },
+  { "problema": "Un camión con una velocidad de 80 km/h llega a su destino en 4 horas. ¿A qué velocidad debe ir para llegar en 2 horas?", "respuesta": "160 km/h", "tipo": "proporcionalidad inversa" },
+  { "problema": "Si 5 kilogramos de manzanas cuestan 250 pesos dominicanos, ¿cuánto costarán 8 kilogramos?", "respuesta": "400 pesos dominicanos", "tipo": "proporcionalidad directa" },
+  { "problema": "Si 4 pintores tardan 6 días en pintar una casa, ¿cuántos pintores se necesitarán para pintarla en 3 días?", "respuesta": "8 pintores", "tipo": "proporcionalidad inversa" },
+  { "problema": "Un ciclista recorre 45 km en 1.5 horas. ¿Cuánto tiempo tardará en recorrer 90 km?", "respuesta": "3 horas", "tipo": "proporcionalidad directa" },
+  { "problema": "Si 10 paquetes de galletas cuestan 350 pesos dominicanos, ¿cuánto costarán 3 paquetes?", "respuesta": "105 pesos dominicanos", "tipo": "proporcionalidad directa" },
+  { "problema": "Si 20 gallinas consumen un saco de alimento en 10 días, ¿cuánto tiempo durará el mismo saco para 25 gallinas?", "respuesta": "8 días", "tipo": "proporcionalidad inversa" },
+  { "problema": "Una costurera hace 3 blusas en 9 horas. ¿Cuánto tiempo tardará en hacer 7 blusas?", "respuesta": "21 horas", "tipo": "proporcionalidad directa" },
+  { "problema": "Si 6 metros de tela cuestan 600 pesos dominicanos, ¿cuánto costarán 15 metros?", "respuesta": "1500 pesos dominicanos", "tipo": "proporcionalidad directa" },
+  { "problema": "Si una bomba de agua llena un tanque en 4 horas con un caudal de 50 litros/min, ¿cuánto tardará si el caudal es de 25 litros/min?", "respuesta": "8 horas", "tipo": "proporcionalidad inversa" },
+  { "problema": "Si 2 pizzas medianas alimentan a 6 personas, ¿cuántas pizzas se necesitarán para alimentar a 18 personas?", "respuesta": "6 pizzas", "tipo": "proporcionalidad directa" },
+  { "problema": "Un jardinero tarda 2 horas en cortar el césped de un jardín de 100 m². ¿Cuánto tardará en cortar el césped de un jardín de 250 m²?", "respuesta": "5 horas", "tipo": "proporcionalidad directa" },
+  { "problema": "Si 8 carpinteros construyen 40 sillas en 5 días, ¿cuántas sillas construirán 12 carpinteros en el mismo tiempo?", "respuesta": "60 sillas", "tipo": "proporcionalidad directa" },
+  { "problema": "Si 12 estudiantes llenan un formulario en 30 minutos, ¿cuánto tardarán 9 estudiantes en llenar el mismo formulario?", "respuesta": "40 minutos", "tipo": "proporcionalidad inversa" },
+  { "problema": "Si 5 kilogramos de papas cuestan 125 pesos dominicanos, ¿cuánto costarán 7 kilogramos?", "respuesta": "175 pesos dominicanos", "tipo": "proporcionalidad directa" },
+  { "problema": "Una empresa de limpieza tarda 10 horas en limpiar un edificio con 3 empleados. ¿Cuánto tiempo tardarán 5 empleados en limpiar el mismo edificio?", "respuesta": "6 horas", "tipo": "proporcionalidad inversa" },
+  { "problema": "Si 3 lapiceros cuestan 90 pesos dominicanos, ¿cuánto costarán 8 lapiceros?", "respuesta": "240 pesos dominicanos", "tipo": "proporcionalidad directa" },
+  { "problema": "Si un coche consume 6 litros de combustible para recorrer 100 km, ¿cuántos litros consumirá para recorrer 250 km?", "respuesta": "15 litros", "tipo": "proporcionalidad directa" },
+  { "problema": "Si 4 maestros pueden corregir 200 exámenes en 5 horas, ¿cuánto tiempo tardarán 10 maestros en corregir la misma cantidad de exámenes?", "respuesta": "2 horas", "tipo": "proporcionalidad inversa" },
+  { "problema": "Si 1.5 metros de alambre cuestan 45 pesos dominicanos, ¿cuánto costarán 4 metros?", "respuesta": "120 pesos dominicanos", "tipo": "proporcionalidad directa" },
+  { "problema": "Si 5 obreros pueden cavar una zanja en 12 horas, ¿cuántos obreros se necesitarán para cavarla en 6 horas?", "respuesta": "10 obreros", "tipo": "proporcionalidad inversa" },
+  { "problema": "Un panadero usa 500 gramos de harina para hacer 10 panes. ¿Cuántos panes podrá hacer con 1.5 kg de harina?", "respuesta": "30 panes", "tipo": "proporcionalidad directa" },
+  { "problema": "Si 7 libros cuestan 1400 pesos dominicanos, ¿cuánto costarán 3 libros?", "respuesta": "600 pesos dominicanos", "tipo": "proporcionalidad directa" },
+  { "problema": "Si un ciclista mantiene una velocidad constante de 20 km/h, ¿cuánto tiempo tardará en recorrer 50 km?", "respuesta": "2.5 horas", "tipo": "proporcionalidad directa" },
+  { "problema": "Si 3 pintores tardan 8 horas en pintar una habitación, ¿cuánto tardarán 6 pintores en pintar la misma habitación?", "respuesta": "4 horas", "tipo": "proporcionalidad inversa" },
+  { "problema": "Si 2 docenas de refrescos cuestan 480 pesos dominicanos, ¿cuánto costarán 5 refrescos?", "respuesta": "100 pesos dominicanos", "tipo": "proporcionalidad directa" },
+  { "problema": "Una fábrica produce 500 unidades en 4 horas con 10 máquinas. ¿Cuánto tiempo tardará en producir 1000 unidades con la misma cantidad de máquinas?", "respuesta": "8 horas", "tipo": "proporcionalidad directa" },
+  { "problema": "Si 6 personas pueden limpiar un parque en 3 horas, ¿cuántas personas se necesitarán para limpiarlo en 1 hora?", "respuesta": "18 personas", "tipo": "proporcionalidad inversa" },
+  { "problema": "Si un camión transporta 1500 kg de arena en 3 viajes, ¿cuántos kilogramos de arena transportará en 7 viajes?", "respuesta": "3500 kg", "tipo": "proporcionalidad directa" },
+  { "problema": "Si 9 estudiantes resuelven 45 problemas en 1 hora, ¿cuántos problemas resolverán 5 estudiantes en la misma hora?", "respuesta": "25 problemas", "tipo": "proporcionalidad directa" }
+]
+const contenedor = document.getElementById("contenedor-problemas");
 
-        const problemas = [
-            { "problema": "Si 3 plátanos cuestan 15 pesos dominicanos, ¿cuánto costarán 10 plátanos?", "respuesta": "50 pesos dominicanos" },
-            { "problema": "Si 5 litros de gasolina cuestan 550 pesos dominicanos, ¿cuánto costarán 12 litros?", "respuesta": "1320 pesos dominicanos" },
-            { "problema": "Una guagua recorre 120 km con 8 galones de gasoil. ¿Cuánto recorrerá con 20 galones?", "respuesta": "300 km" },
-            { "problema": "Si 2 libras de yuca cuestan 60 pesos, ¿cuánto costarán 5 libras?", "respuesta": "150 pesos dominicanos" },
-            { "problema": "Un estudiante tarda 40 minutos en leer 20 páginas. ¿Cuánto tardará en leer 50 páginas?", "respuesta": "100 minutos" },
-            { "problema": "Una empleada doméstica gana 1,200 pesos por 2 días de trabajo. ¿Cuánto ganará por 5 días?", "respuesta": "3000 pesos dominicanos" },
-            { "problema": "Si 4 botellas de agua de 5 galones cuestan 400 pesos, ¿cuánto costarán 9 botellas?", "respuesta": "900 pesos dominicanos" },
-            { "problema": "Un colmado vende 3 libras de arroz por 90 pesos. ¿Cuánto costarán 10 libras?", "respuesta": "300 pesos dominicanos" },
-            { "problema": "Si una guagua tarda 2 horas en recorrer 80 km, ¿cuánto tardará en recorrer 200 km?", "respuesta": "5 horas" },
-            { "problema": "Un vendedor ambulante gana 750 pesos vendiendo 15 empanadas. ¿Cuánto ganará vendiendo 40 empanadas?", "respuesta": "2000 pesos dominicanos" },
-            { "problema": "Una empresa de Santiago produce 100 cajas de cigarros en 4 horas. ¿Cuántas producirá en 10 horas?", "respuesta": "250 cajas" },
-            { "problema": "Un agricultor cultiva 30 tareas de tierra en 6 días. ¿Cuántas cultivará en 10 días?", "respuesta": "50 tareas" },
-            { "problema": "Si 6 huevos cuestan 60 pesos, ¿cuánto costarán 18 huevos?", "respuesta": "180 pesos dominicanos" },
-            { "problema": "Una persona consume 4 botellitas de agua al día. ¿Cuántas necesitará para 15 días?", "respuesta": "60 botellitas" },
-            { "problema": "Un estudiante de Baní recorre 15 km en 45 minutos en bicicleta. ¿Cuánto recorrerá en 2 horas?", "respuesta": "40 km" },
-            { "problema": "Un taxista cobra 250 pesos por 5 kilómetros. ¿Cuánto cobrará por 12 kilómetros?", "respuesta": "600 pesos dominicanos" },
-            { "problema": "Una planta de energía solar genera 150 kWh en 5 días. ¿Cuánta energía generará en 12 días?", "respuesta": "360 kWh" },
-            { "problema": "Si un saco de cemento cuesta 580 pesos y alcanza para 4 m², ¿cuánto costarán 10 m²?", "respuesta": "1450 pesos dominicanos" },
-            { "problema": "Una persona paga 900 pesos de luz por consumir 120 kWh. ¿Cuánto pagará si consume 200 kWh?", "respuesta": "1500 pesos dominicanos" },
-            { "problema": "Si 2 libras de carne cuestan 300 pesos, ¿cuánto costarán 7 libras?", "respuesta": "1050 pesos dominicanos" },
-            {
-                "problema": "Si 3 trabajadores pueden construir una casa en 12 días, ¿en cuántos días podrán construirla 6 trabajadores?",
-                "respuesta": "6 días"
-            },
-            {
-                "problema": "Si un camión puede transportar 10 toneladas de carga en 5 horas, ¿cuánto tiempo tardará en transportar 30 toneladas?",
-                "respuesta": "15 horas"
-            },
-            {
-                "problema": "Si 5 personas pueden pintar una casa en 8 horas, ¿cuántas horas tardarán 20 personas en pintarla?",
-                "respuesta": "2 horas"
-            },
-            {
-                "problema": "Si 4 impresoras pueden imprimir 500 hojas en 10 minutos, ¿cuánto tardarán 8 impresoras en imprimir 500 hojas?",
-                "respuesta": "5 minutos"
-            },
-            {
-                "problema": "Si un agricultor siembra 100 metros cuadrados de arroz en 20 días, ¿cuánto tardará en sembrar 500 metros cuadrados?",
-                "respuesta": "100 días"
-            },
-            {
-                "problema": "Si 6 trabajadores construyen un muro en 15 días, ¿cuántos días tardarán 3 trabajadores en construir el mismo muro?",
-                "respuesta": "30 días"
-            },
-            {
-                "problema": "Si 3 máquinas producen 600 botellas por hora, ¿cuántas máquinas se necesitarán para producir 1800 botellas por hora?",
-                "respuesta": "9 máquinas"
-            },
-            {
-                "problema": "Si 2 cisternas llenan una piscina en 10 horas, ¿cuántas horas tardarán 4 cisternas en llenarla?",
-                "respuesta": "5 horas"
-            },
-            {
-                "problema": "Si un agricultor cosecha 120 kilos de tomate en 8 horas, ¿cuánto tiempo tardará en cosechar 240 kilos de tomate?",
-                "respuesta": "16 horas"
-            },
-            {
-                "problema": "Si una máquina produce 200 piezas por hora, ¿cuántas horas necesitarán 5 máquinas para producir 2000 piezas?",
-                "respuesta": "2 horas"
-            },
-            {
-                "problema": "Si 3 trabajadores pueden cultivar 60 tareas de tierra en 9 días, ¿en cuántos días podrán cultivar 180 tareas de tierra 6 trabajadores?",
-                "respuesta": "9 días"
-            },
-            {
-                "problema": "Si 7 personas pueden limpiar un parque en 14 horas, ¿cuántas personas necesitarán para limpiar el parque en 7 horas?",
-                "respuesta": "14 personas"
-            },
-            {
-                "problema": "Si un motor puede bombear 200 litros de agua en 10 minutos, ¿cuánto tiempo tardará en bombear 600 litros de agua?",
-                "respuesta": "30 minutos"
-            },
-            {
-                "problema": "Si un barco recorre 100 kilómetros en 5 horas, ¿cuánto tiempo tardará en recorrer 400 kilómetros?",
-                "respuesta": "20 horas"
-            },
-            {
-                "problema": "Si 4 carpinteros terminan de construir una mesa en 16 horas, ¿cuántos carpinteros necesitarían para construirla en 4 horas?",
-                "respuesta": "16 carpinteros"
-            },
-            {
-                "problema": "Si 3 personas siembran 150 plantas en 6 horas, ¿cuántas horas necesitarán 6 personas para sembrar 450 plantas?",
-                "respuesta": "6 horas"
-            },
-            {
-                "problema": "Si 5 vacas producen 50 litros de leche en 4 horas, ¿cuántas vacas se necesitan para producir 100 litros en 8 horas?",
-                "respuesta": "10 vacas"
-            },
-            {
-                "problema": "Si 2 carpinteros tardan 12 días en hacer 2 muebles, ¿cuántos días tardarán 4 carpinteros en hacer 4 muebles?",
-                "respuesta": "6 días"
-            },
-            {
-                "problema": "Si un motor puede bombear 400 litros de agua en 10 minutos, ¿cuántos litros de agua podrá bombear en 30 minutos?",
-                "respuesta": "1200 litros"
-            },
-            {
-                "problema": "Si una máquina produce 600 piezas en 8 horas, ¿cuántas horas necesitarán 3 máquinas para producir 1800 piezas?",
-                "respuesta": "4 horas"
-            },
-            {
-                "problema": "Si 3 trabajadores construyen una bodega en 15 días, ¿en cuántos días podrán construirla 9 trabajadores?",
-                "respuesta": "5 días"
-            },
-            {
-                "problema": "¿Cuál es el 50% de 100?",
-                "respuesta": 50
-            },
-            {
-                "problema": "¿Cuál es el 25% de 80?",
-                "respuesta": 20
-            },
-            {
-                "problema": "¿Cuál es el 10% de 120?",
-                "respuesta": 12
-            },
-            {
-                "problema": "¿Cuál es el 75% de 40?",
-                "respuesta": 30
-            },
-            {
-                "problema": "¿Cuál es el 20% de 55?",
-                "respuesta": 11
-            },
-            {
-                "problema": "¿Cuál es el 1% de 300?",
-                "respuesta": 3
-            },
-            {
-                "problema": "¿Cuál es el 30% de 90?",
-                "respuesta": 27
-            },
-            {
-                "problema": "¿Cuál es el 60% de 70?",
-                "respuesta": 42
-            },
-            {
-                "problema": "¿Cuál es el 90% de 50?",
-                "respuesta": 45
-            },
-            {
-                "problema": "¿Cuál es el 5% de 200?",
-                "respuesta": 10
-            },
-            {
-                "problema": "¿Cuál es el 15% de 60?",
-                "respuesta": 9
-            },
-            {
-                "problema": "¿Cuál es el 35% de 40?",
-                "respuesta": 14
-            },
-            {
-                "problema": "¿Cuál es el 80% de 25?",
-                "respuesta": 20
-            },
-            {
-                "problema": "¿Cuál es el 40% de 35?",
-                "respuesta": 14
-            },
-            {
-                "problema": "¿Cuál es el 2% de 150?",
-                "respuesta": 3
-            },
-            {
-                "problema": "¿Cuál es el 50% de 37?",
-                "respuesta": 18.5
-            },
-            {
-                "problema": "¿Cuál es el 10% de 75?",
-                "respuesta": 7.5
-            },
-            {
-                "problema": "¿Cuál es el 25% de 50?",
-                "respuesta": 12.5
-            },
-            {
-                "problema": "¿Cuál es el 75% de 12?",
-                "respuesta": 9
-            },
-            {
-                "problema": "¿Cuál es el 20% de 45?",
-                "respuesta": 9
-            }
-        ]
-
-        // */
-        const contenedor = document.getElementById("contenedor-problemas");
-
-        problemas.forEach((item, index) => {
-            const div = document.createElement("div");
-            div.className = "problema";
-            div.innerHTML = `
+problemas.forEach((item, index) => {
+    const div = document.createElement("div");
+    div.className = "problema";
+    div.innerHTML = `
         <strong>Problema ${index + 1}:</strong> ${item.problema}
-        <p class="respuesta">Respuesta:${item.respuesta}</p>
-
-      `;
-            contenedor.appendChild(div);
-        });
+        <p class="respuesta">Respuesta: ${item.respuesta}</p>
+        <p class="tipo">Tipo: ${item.tipo}</p>
+    `;
+    contenedor.appendChild(div);
+});
     </script>
 </body>
 
