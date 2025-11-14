@@ -1,784 +1,181 @@
-<DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Libro de texto Primero de secundaria</title>
-    <style>
-        body,
-        html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-        }
-    </style>
-</head>
-
-<body>
-    <iframe src="https://drive.google.com/file/d/11u_rtIykgYlg1vBwo5kKf2LsOov-LVZO/preview"></iframe>
-</body>
-
-</html>
-
-<!--!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Problemas de Regla de Tres.</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f8fb;
-            color: #333;
-            padding: 40px;
-            max-width: 100%;
-            margin: 0;
-            font-size: 28px;
-            /* Tamaño base aumentado */
-        }
-
-        h1 {
-            color: #004080;
-            text-align: center;
-            font-size: 48px;
-            /* Título más grande */
-        }
-
-        .problema {
-            background-color: #ffffff;
-            border-left: 6px solid #004080;
-            padding: 25px;
-            margin-bottom: 40px;
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
-            font-size: 36px;
-            /* Tamaño aún mayor para los problemas */
-        }
-
-        .problema p {
-            margin: 15px 0;
-        }
-
-        .respuesta {
-            color: #007000;
-            font-weight: bold;
-            font-size: 40px;
-            /* Respuesta más grande */
-        }
-
-        footer {
-            text-align: center;
-            font-size: 24px;
-            /* Pie de página más grande */
-            margin-top: 50px;
-            color: #777;
-        }
-
-        /* Para pantallas grandes, ajustamos la escala aún más */
-        @media (min-width: 1200px) {
-            body {
-                font-size: 32px;
-            }
-
-            .problema {
-                font-size: 48px;
-            }
-
-            .respuesta {
-                font-size: 50px;
-            }
-
-            h1 {
-                font-size: 60px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-    <h1><span>Problemas de Regla de tres simple</span>
-    </h1>
-
-    <div id="contenedor-problemas"></div>
-
-    <footer>
-        Hecho por Luis Antonio Nolasco Gomez. &hearts;
-    </footer>
-
-    <script>
-
-        const problemas = [
-            { "problema": "Si 3 plátanos cuestan 15 pesos dominicanos, ¿cuánto costarán 10 plátanos?", "respuesta": "50 pesos dominicanos" },
-            { "problema": "Si 5 litros de gasolina cuestan 550 pesos dominicanos, ¿cuánto costarán 12 litros?", "respuesta": "1320 pesos dominicanos" },
-            { "problema": "Una guagua recorre 120 km con 8 galones de gasoil. ¿Cuánto recorrerá con 20 galones?", "respuesta": "300 km" },
-            { "problema": "Si 2 libras de yuca cuestan 60 pesos, ¿cuánto costarán 5 libras?", "respuesta": "150 pesos dominicanos" },
-            { "problema": "Un estudiante tarda 40 minutos en leer 20 páginas. ¿Cuánto tardará en leer 50 páginas?", "respuesta": "100 minutos" },
-            { "problema": "Una empleada doméstica gana 1,200 pesos por 2 días de trabajo. ¿Cuánto ganará por 5 días?", "respuesta": "3000 pesos dominicanos" },
-            { "problema": "Si 4 botellas de agua de 5 galones cuestan 400 pesos, ¿cuánto costarán 9 botellas?", "respuesta": "900 pesos dominicanos" },
-            { "problema": "Un colmado vende 3 libras de arroz por 90 pesos. ¿Cuánto costarán 10 libras?", "respuesta": "300 pesos dominicanos" },
-            { "problema": "Si una guagua tarda 2 horas en recorrer 80 km, ¿cuánto tardará en recorrer 200 km?", "respuesta": "5 horas" },
-            { "problema": "Un vendedor ambulante gana 750 pesos vendiendo 15 empanadas. ¿Cuánto ganará vendiendo 40 empanadas?", "respuesta": "2000 pesos dominicanos" },
-            { "problema": "Una empresa de Santiago produce 100 cajas de cigarros en 4 horas. ¿Cuántas producirá en 10 horas?", "respuesta": "250 cajas" },
-            { "problema": "Un agricultor cultiva 30 tareas de tierra en 6 días. ¿Cuántas cultivará en 10 días?", "respuesta": "50 tareas" },
-            { "problema": "Si 6 huevos cuestan 60 pesos, ¿cuánto costarán 18 huevos?", "respuesta": "180 pesos dominicanos" },
-            { "problema": "Una persona consume 4 botellitas de agua al día. ¿Cuántas necesitará para 15 días?", "respuesta": "60 botellitas" },
-            { "problema": "Un estudiante de Baní recorre 15 km en 45 minutos en bicicleta. ¿Cuánto recorrerá en 2 horas?", "respuesta": "40 km" },
-            { "problema": "Un taxista cobra 250 pesos por 5 kilómetros. ¿Cuánto cobrará por 12 kilómetros?", "respuesta": "600 pesos dominicanos" },
-            { "problema": "Una planta de energía solar genera 150 kWh en 5 días. ¿Cuánta energía generará en 12 días?", "respuesta": "360 kWh" },
-            { "problema": "Si un saco de cemento cuesta 580 pesos y alcanza para 4 m², ¿cuánto costarán 10 m²?", "respuesta": "1450 pesos dominicanos" },
-            { "problema": "Una persona paga 900 pesos de luz por consumir 120 kWh. ¿Cuánto pagará si consume 200 kWh?", "respuesta": "1500 pesos dominicanos" },
-            { "problema": "Si 2 libras de carne cuestan 300 pesos, ¿cuánto costarán 7 libras?", "respuesta": "1050 pesos dominicanos" },
-            {
-                "problema": "Si 3 trabajadores pueden construir una casa en 12 días, ¿en cuántos días podrán construirla 6 trabajadores?",
-                "respuesta": "6 días"
-            },
-            {
-                "problema": "Si un camión puede transportar 10 toneladas de carga en 5 horas, ¿cuánto tiempo tardará en transportar 30 toneladas?",
-                "respuesta": "15 horas"
-            },
-            {
-                "problema": "Si 5 personas pueden pintar una casa en 8 horas, ¿cuántas horas tardarán 20 personas en pintarla?",
-                "respuesta": "2 horas"
-            },
-            {
-                "problema": "Si 4 impresoras pueden imprimir 500 hojas en 10 minutos, ¿cuánto tardarán 8 impresoras en imprimir 500 hojas?",
-                "respuesta": "5 minutos"
-            },
-            {
-                "problema": "Si un agricultor siembra 100 metros cuadrados de arroz en 20 días, ¿cuánto tardará en sembrar 500 metros cuadrados?",
-                "respuesta": "100 días"
-            },
-            {
-                "problema": "Si 6 trabajadores construyen un muro en 15 días, ¿cuántos días tardarán 3 trabajadores en construir el mismo muro?",
-                "respuesta": "30 días"
-            },
-            {
-                "problema": "Si 3 máquinas producen 600 botellas por hora, ¿cuántas máquinas se necesitarán para producir 1800 botellas por hora?",
-                "respuesta": "9 máquinas"
-            },
-            {
-                "problema": "Si 2 cisternas llenan una piscina en 10 horas, ¿cuántas horas tardarán 4 cisternas en llenarla?",
-                "respuesta": "5 horas"
-            },
-            {
-                "problema": "Si un agricultor cosecha 120 kilos de tomate en 8 horas, ¿cuánto tiempo tardará en cosechar 240 kilos de tomate?",
-                "respuesta": "16 horas"
-            },
-            {
-                "problema": "Si una máquina produce 200 piezas por hora, ¿cuántas horas necesitarán 5 máquinas para producir 2000 piezas?",
-                "respuesta": "2 horas"
-            },
-            {
-                "problema": "Si 3 trabajadores pueden cultivar 60 tareas de tierra en 9 días, ¿en cuántos días podrán cultivar 180 tareas de tierra 6 trabajadores?",
-                "respuesta": "9 días"
-            },
-            {
-                "problema": "Si 7 personas pueden limpiar un parque en 14 horas, ¿cuántas personas necesitarán para limpiar el parque en 7 horas?",
-                "respuesta": "14 personas"
-            },
-            {
-                "problema": "Si un motor puede bombear 200 litros de agua en 10 minutos, ¿cuánto tiempo tardará en bombear 600 litros de agua?",
-                "respuesta": "30 minutos"
-            },
-            {
-                "problema": "Si un barco recorre 100 kilómetros en 5 horas, ¿cuánto tiempo tardará en recorrer 400 kilómetros?",
-                "respuesta": "20 horas"
-            },
-            {
-                "problema": "Si 4 carpinteros terminan de construir una mesa en 16 horas, ¿cuántos carpinteros necesitarían para construirla en 4 horas?",
-                "respuesta": "16 carpinteros"
-            },
-            {
-                "problema": "Si 3 personas siembran 150 plantas en 6 horas, ¿cuántas horas necesitarán 6 personas para sembrar 450 plantas?",
-                "respuesta": "6 horas"
-            },
-            {
-                "problema": "Si 5 vacas producen 50 litros de leche en 4 horas, ¿cuántas vacas se necesitan para producir 100 litros en 8 horas?",
-                "respuesta": "10 vacas"
-            },
-            {
-                "problema": "Si 2 carpinteros tardan 12 días en hacer 2 muebles, ¿cuántos días tardarán 4 carpinteros en hacer 4 muebles?",
-                "respuesta": "6 días"
-            },
-            {
-                "problema": "Si un motor puede bombear 400 litros de agua en 10 minutos, ¿cuántos litros de agua podrá bombear en 30 minutos?",
-                "respuesta": "1200 litros"
-            },
-            {
-                "problema": "Si una máquina produce 600 piezas en 8 horas, ¿cuántas horas necesitarán 3 máquinas para producir 1800 piezas?",
-                "respuesta": "4 horas"
-            },
-            {
-                "problema": "Si 3 trabajadores construyen una bodega en 15 días, ¿en cuántos días podrán construirla 9 trabajadores?",
-                "respuesta": "5 días"
-            },
-            {
-                "problema": "¿Cuál es el 50% de 100?",
-                "respuesta": 50
-            },
-            {
-                "problema": "¿Cuál es el 25% de 80?",
-                "respuesta": 20
-            },
-            {
-                "problema": "¿Cuál es el 10% de 120?",
-                "respuesta": 12
-            },
-            {
-                "problema": "¿Cuál es el 75% de 40?",
-                "respuesta": 30
-            },
-            {
-                "problema": "¿Cuál es el 20% de 55?",
-                "respuesta": 11
-            },
-            {
-                "problema": "¿Cuál es el 1% de 300?",
-                "respuesta": 3
-            },
-            {
-                "problema": "¿Cuál es el 30% de 90?",
-                "respuesta": 27
-            },
-            {
-                "problema": "¿Cuál es el 60% de 70?",
-                "respuesta": 42
-            },
-            {
-                "problema": "¿Cuál es el 90% de 50?",
-                "respuesta": 45
-            },
-            {
-                "problema": "¿Cuál es el 5% de 200?",
-                "respuesta": 10
-            },
-            {
-                "problema": "¿Cuál es el 15% de 60?",
-                "respuesta": 9
-            },
-            {
-                "problema": "¿Cuál es el 35% de 40?",
-                "respuesta": 14
-            },
-            {
-                "problema": "¿Cuál es el 80% de 25?",
-                "respuesta": 20
-            },
-            {
-                "problema": "¿Cuál es el 40% de 35?",
-                "respuesta": 14
-            },
-            {
-                "problema": "¿Cuál es el 2% de 150?",
-                "respuesta": 3
-            },
-            {
-                "problema": "¿Cuál es el 50% de 37?",
-                "respuesta": 18.5
-            },
-            {
-                "problema": "¿Cuál es el 10% de 75?",
-                "respuesta": 7.5
-            },
-            {
-                "problema": "¿Cuál es el 25% de 50?",
-                "respuesta": 12.5
-            },
-            {
-                "problema": "¿Cuál es el 75% de 12?",
-                "respuesta": 9
-            },
-            {
-                "problema": "¿Cuál es el 20% de 45?",
-                "respuesta": 9
-            }
-        ]
-
-        // */
-        const contenedor = document.getElementById("contenedor-problemas");
-
-        problemas.forEach((item, index) => {
-            const div = document.createElement("div");
-            div.className = "problema";
-            div.innerHTML = `
-        <strong>Problema ${index + 1}:</strong> ${item.problema}
-        <p class="respuesta">Respuesta:${item.respuesta}</p>
-
-      `;
-            contenedor.appendChild(div);
-        });
-    </script>
-</body>
-
-</html>
-
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Regla de Tres</title>
+    <title>Ejercicios de Suma y Resta Vertical Separada</title>
 
     <style>
-        /* Estilos generales */
         body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            /* Alinea al inicio para que el contenido no se pegue al centro de la pantalla si es corto */
-            min-height: 100vh;
-            background-color: #f4f4f4;
+            font-family: "Inter", Arial, sans-serif;
+            background: #f4f6fa;
             margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-            /* Incluye padding en el ancho total */
-        }
-
-        .container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 600px;
-            text-align: center;
-        }
-
-        h1,
-        h2 {
+            padding: 2rem;
             color: #333;
-            margin-bottom: 20px;
         }
 
-        .input-section p,
-        .proportionality-section p {
-            margin-bottom: 15px;
-            font-size: 1.1em;
-            color: #555;
-        }
-
-        .input-group {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 15px;
-            gap: 15px;
-            /* Espacio entre los inputs */
-        }
-
-        .input-group input[type="number"] {
-            width: 48%;
-            /* Casi la mitad, dejando espacio para el gap */
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1em;
+        h1 {
             text-align: center;
+            color: #1d3557;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
         }
 
-        .proportionality-section label {
-            display: block;
-            margin-bottom: 10px;
-            font-size: 1em;
-            color: #444;
+        .exercise {
+            background: white;
+            padding: 1.4rem;
+            margin-bottom: 1.8rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .proportionality-section input[type="radio"] {
-            margin-right: 8px;
-        }
-
-        button {
-            background-color: #007bff;
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1em;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 20px;
-            margin-bottom: 30px;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .results-section {
-            text-align: left;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
-            margin-top: 20px;
-        }
-
-        #steps p {
-            font-size: 1.1em;
-            line-height: 1.5;
-            margin-bottom: 10px;
-        }
-
-        #result {
-            font-size: 1.4em;
+        .operation {
+            font-size: 1.1rem;
             font-weight: bold;
-            color: #28a745;
-            /* Color verde para el resultado */
-            text-align: center;
+            margin-bottom: 1rem;
+            color: #1d3557;
         }
 
-        /* Estilos para las tablas de fracciones */
-        .math-fraction-container {
-            display: flex;
-            /* Para alinear las tablas y los signos de igual horizontalmente */
-            align-items: center;
-            /* Centrar verticalmente */
-            margin-top: 15px;
-            margin-bottom: 15px;
-            overflow-x: auto;
-            /* Para desplazar si la expresión es muy larga */
-            white-space: nowrap;
-            /* Evitar saltos de línea */
-            justify-content: center;
-            /* Centrar el bloque de pasos horizontalmente */
-            font-family: Arial, sans-serif;
-            /* Fuente legible para matemáticas */
-        }
-
-        .math-fraction-table {
-            border-collapse: collapse;
-            /* Eliminar el espacio entre las celdas del borde */
+        .vertical-box {
+            font-family: "Courier New", monospace;
+            background: #fdfdfd;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ddd;
             display: inline-block;
-            /* Para que actúe como un elemento en línea dentro del flex */
-            vertical-align: middle;
-            /* Para alinear mejor con el signo de igual */
-            margin: 0 5px;
-            /* Espacio entre tablas y signos de igual */
+            margin-bottom: 1rem;
+            margin-right: 2rem;
         }
 
-        .math-fraction-table .num,
-        .math-fraction-table .den {
-            padding: 5px 10px;
-            text-align: center;
-            font-size: 1.2em;
-            /* Hace los números de la fracción más grandes */
+        .vertical-num {
+            text-align: right;
+            font-size: 1.1rem;
+            padding: 2px 0;
+        }
+
+        .vertical-line {
+            border-top: 3px solid #333;
+            margin: 6px 0;
+        }
+
+        .vertical-result {
+            text-align: right;
+            font-size: 1.3rem;
             font-weight: bold;
         }
 
-        .math-fraction-table .line {
-            border-bottom: 2px solid black;
-            /* La línea divisoria de la fracción */
-            height: 0;
-            /* Para que no ocupe espacio vertical */
-            line-height: 0;
-            font-size: 0;
-            /* Para que no afecte el tamaño del texto */
+        .positivos {
+            color: #2d7a2d;
         }
 
-        .math-equals-sign {
-            font-size: 2em;
-            /* Tamaño del signo de igual */
-            padding: 0 10px;
+        .negativos {
+            color: #b32020;
+        }
+
+        .resultado-final {
+            background: #e7f0fd;
+            color: #1b4f9c;
+            border-left: 5px solid #1b4f9c;
+            font-size: 1.2rem;
+            margin-top: 0.7rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
             font-weight: bold;
         }
 
-        /* Estilo para la etiqueta <del> */
-        del {
-            color: #d00;
-            /* Un color rojo para el tachado */
-            text-decoration: line-through;
+        @media (max-width: 700px) {
+            .boxes-wrapper {
+                display: block;
+            }
+
+            .vertical-box {
+                margin-bottom: 1rem;
+            }
         }
     </style>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.1/math.min.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const aInput = document.getElementById('a');
-            const bInput = document.getElementById('b');
-            const cInput = document.getElementById('c');
-            const dInput = document.getElementById('d');
-            const calculateBtn = document.getElementById('calculateBtn');
-            const stepsDiv = document.getElementById('steps');
-            const resultP = document.getElementById('result');
-
-            // Función para generar una fracción como tabla HTML
-            function createFractionTableHtml(numeratorContent, denominatorContent) {
-                return `
-                    <table class="math-fraction-table">
-                        <tr>
-                            <td class="num">${numeratorContent}</td>
-                        </tr>
-                        <tr>
-                            <td class="line"></td>
-                        </tr>
-                        <tr>
-                            <td class="den">${denominatorContent}</td>
-                        </tr>
-                    </table>
-                `;
-            }
-
-            // Función para obtener el HTML de un signo de igualdad centrado
-            function createEqualsSignHtml() {
-                return `<span class="math-equals-sign">=</span>`;
-            }
-
-            // Función para simplificar una fracción y generar su HTML con tachado si aplica
-            function getSimplifiedFractionHtml(numerator, denominator, initialNumerator, initialDenominator) {
-                let currentNum = initialNumerator;
-                let currentDen = initialDenominator;
-                let html = '';
-
-                // Paso 1: Simplificar ceros finales y generar HTML con <del>
-                let numStr = String(currentNum);
-                let denStr = String(currentDen);
-                let commonTrailingZeros = 0;
-
-                // Bucle para contar y "tachar" ceros finales
-                while (numStr.length > 0 && denStr.length > 0 && numStr.endsWith('0') && denStr.endsWith('0')) {
-                    commonTrailingZeros++;
-                    // Eliminamos el último cero para la siguiente iteración
-                    numStr = numStr.slice(0, -1);
-                    denStr = denStr.slice(0, -1);
-                }
-
-                if (commonTrailingZeros > 0) {
-                    // Reconstruir los números originales con la etiqueta <del>
-                    let originalNumWithDel = String(initialNumerator);
-                    let originalDenWithDel = String(initialDenominator);
-
-                    // Envolver los ceros finales en <del>
-                    originalNumWithDel = originalNumWithDel.substring(0, originalNumWithDel.length - commonTrailingZeros) +
-                        '<del>' + originalNumWithDel.substring(originalNumWithDel.length - commonTrailingZeros) + '</del>';
-                    originalDenWithDel = originalDenWithDel.substring(0, originalDenWithDel.length - commonTrailingZeros) +
-                        '<del>' + originalDenWithDel.substring(originalDenWithDel.length - commonTrailingZeros) + '</del>';
-
-                    // Los números simplificados por ceros
-                    currentNum = initialNumerator / Math.pow(10, commonTrailingZeros);
-                    currentDen = initialDenominator / Math.pow(10, commonTrailingZeros);
-
-                    html += createEqualsSignHtml();
-                    html += createFractionTableHtml(originalNumWithDel, originalDenWithDel);
-                    html += createEqualsSignHtml();
-                    html += createFractionTableHtml(currentNum, currentDen);
-                }
-
-                // Paso 2: Simplificar por MCD si es necesario (después de la simplificación de ceros)
-                const commonDivisor = math.gcd(currentNum, currentDen);
-                if (commonDivisor > 1) {
-                    const finalNum = currentNum / commonDivisor;
-                    const finalDen = currentDen / commonDivisor;
-
-                    html += createEqualsSignHtml();
-                    html += createFractionTableHtml(finalNum, finalDen);
-                    currentNum = finalNum;
-                    currentDen = finalDen;
-                }
-
-                return { html: html, currentNum: currentNum, currentDen: currentDen };
-            }
-
-
-            calculateBtn.addEventListener('click', () => {
-                let a = parseFloat(aInput.value);
-                let b = parseFloat(bInput.value);
-                let c = parseFloat(cInput.value);
-                let d_val = dInput.value;
-
-                const proportionality = document.querySelector('input[name="proportionality"]:checked').value;
-
-                stepsDiv.innerHTML = '';
-                resultP.textContent = '';
-
-                let unknownVar = '';
-                let knownCount = 0;
-
-                if (!isNaN(a)) knownCount++; else unknownVar = 'a';
-                if (!isNaN(b)) knownCount++; else unknownVar = 'b';
-                if (!isNaN(c)) knownCount++; else unknownVar = 'c';
-                if (d_val !== '' && !isNaN(parseFloat(d_val))) knownCount++; else unknownVar = 'd';
-
-                if (knownCount !== 3) {
-                    stepsDiv.innerHTML = '<p style="color: red;">Por favor, ingresa exactamente tres valores conocidos y deja uno en blanco para el desconocido.</p>';
-                    return;
-                }
-
-                let calculatedResult;
-                let stepsArray = [];
-                let productNumerator;
-                let divisorDenominator;
-                let factor1, factor2;
-
-                const displayA = (unknownVar === 'a') ? 'x' : a;
-                const displayB = (unknownVar === 'b') ? 'x' : b;
-                const displayC = (unknownVar === 'c') ? 'x' : c;
-                const displayD = (unknownVar === 'd') ? 'x' : parseFloat(d_val);
-
-                stepsArray.push(`<h2>${proportionality === 'direct' ? 'Proporcionalidad Directa' : 'Proporcionalidad Inversa'}</h2>`);
-                stepsArray.push(`<p>Valores dados: a=${displayA}, b=${displayB}, c=${displayC}, d=${displayD}</p>`);
-
-                if (proportionality === 'direct') {
-                    stepsArray.push(`<p>Para la proporcionalidad directa, la relación es a/b = c/d.</p>`);
-                    stepsArray.push(`<p>Para encontrar el valor de x, <b>multiplicamos los dos valores conocidos en diagonal y dividimos por el valor que está en la misma línea que x</b>.</p>`);
-
-                    if (unknownVar === 'd') {
-                        if (a === 0) {
-                            stepsDiv.innerHTML = '<p style="color: red;">Error: La división por cero no está permitida para calcular x.</p>';
-                            return;
-                        }
-                        factor1 = b; factor2 = c;
-                        productNumerator = b * c;
-                        divisorDenominator = a;
-                    } else if (unknownVar === 'a') {
-                        let d = parseFloat(d_val);
-                        if (d === 0) {
-                            stepsDiv.innerHTML = '<p style="color: red;">Error: La división por cero no está permitida para calcular x.</p>';
-                            return;
-                        }
-                        factor1 = b; factor2 = c;
-                        productNumerator = b * c;
-                        divisorDenominator = d;
-                    } else if (unknownVar === 'b') {
-                        let d = parseFloat(d_val);
-                        if (c === 0) {
-                            stepsDiv.innerHTML = '<p style="color: red;">Error: La división por cero no está permitida para calcular x.</p>';
-                            return;
-                        }
-                        factor1 = a; factor2 = d;
-                        productNumerator = a * d;
-                        divisorDenominator = c;
-                    } else if (unknownVar === 'c') {
-                        let d = parseFloat(d_val);
-                        if (b === 0) {
-                            stepsDiv.innerHTML = '<p style="color: red;">Error: La división por cero no está permitida para calcular x.</p>';
-                            return;
-                        }
-                        factor1 = a; factor2 = d;
-                        productNumerator = a * d;
-                        divisorDenominator = b;
-                    }
-
-                } else if (proportionality === 'inverse') {
-                    stepsArray.push(`<p>Para la proporcionalidad inversa, la relación es a ⋅ b = c ⋅ d.</p>`);
-                    stepsArray.push(`<p>Para encontrar el valor de x, <b>multiplicamos los dos valores conocidos que están en la misma línea y dividimos por el valor restante</b>.</p>`);
-
-                    if (unknownVar === 'd') {
-                        if (c === 0) {
-                            stepsDiv.innerHTML = '<p style="color: red;">Error: La división por cero no está permitida para calcular x.</p>';
-                            return;
-                        }
-                        factor1 = a; factor2 = b;
-                        productNumerator = a * b;
-                        divisorDenominator = c;
-                    } else if (unknownVar === 'a') {
-                        let d = parseFloat(d_val);
-                        if (b === 0) {
-                            stepsDiv.innerHTML = '<p style="color: red;">Error: La división por cero no está permitida para calcular x.</p>';
-                            return;
-                        }
-                        factor1 = c; factor2 = d;
-                        productNumerator = c * d;
-                        divisorDenominator = b;
-                    } else if (unknownVar === 'b') {
-                        let d = parseFloat(d_val);
-                        if (a === 0) {
-                            stepsDiv.innerHTML = '<p style="color: red;">Error: La división por cero no está permitida para calcular x.</p>';
-                            return;
-                        }
-                        factor1 = c; factor2 = d;
-                        productNumerator = c * d;
-                        divisorDenominator = a;
-                    } else if (unknownVar === 'c') {
-                        let d = parseFloat(d_val);
-                        if (d === 0) {
-                            stepsDiv.innerHTML = '<p style="color: red;">Error: La división por cero no está permitida para calcular x.</p>';
-                            return;
-                        }
-                        factor1 = a; factor2 = b;
-                        productNumerator = a * b;
-                        divisorDenominator = d;
-                    }
-                }
-
-                calculatedResult = productNumerator / divisorDenominator;
-
-                stepsArray.push(`<p>Primero, multiplicamos los valores correspondientes:</p>`);
-                stepsArray.push(`<p>${factor1} &times; ${factor2} = ${productNumerator}</p>`);
-
-                stepsArray.push(`<p>Luego, dividimos el producto entre el valor restante para encontrar x:</p>`);
-
-                let fractionHtmlSteps = `<div class="math-fraction-container">`;
-                fractionHtmlSteps += `<span>x =</span>`;
-
-                // Primera fracción: con la operación de multiplicación en el numerador
-                fractionHtmlSteps += createFractionTableHtml(`${factor1} &times; ${factor2}`, divisorDenominator);
-                fractionHtmlSteps += createEqualsSignHtml();
-
-                // Segunda fracción: con el resultado de la multiplicación en el numerador
-                fractionHtmlSteps += createFractionTableHtml(productNumerator, divisorDenominator);
-
-                // Simplificación de la fracción (con tachado si aplica)
-                const simplifiedResult = getSimplifiedFractionHtml(productNumerator, divisorDenominator, productNumerator, divisorDenominator);
-                fractionHtmlSteps += simplifiedResult.html;
-
-                // Resultado final
-                fractionHtmlSteps += createEqualsSignHtml();
-                fractionHtmlSteps += `<span>${parseFloat(calculatedResult.toFixed(4))}</span>`;
-                fractionHtmlSteps += `</div>`;
-
-                stepsArray.push(fractionHtmlSteps);
-
-                stepsDiv.innerHTML = stepsArray.join('');
-                resultP.textContent = `El valor desconocido (x) es aproximadamente: ${parseFloat(calculatedResult.toFixed(4))}`;
-            });
-        });
-    </script>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Calculadora de Regla de Tres</h1>
 
-        <div class="input-section">
-            <p>Ingresa los valores conocidos para la regla de tres. Deja el valor desconocido en blanco.</p>
-            <div class="input-group">
-                <input type="number" id="a" placeholder="Valor A">
-                <input type="number" id="b" placeholder="Valor B">
+    <h1>200 Ejercicios de Suma</h1>
+    <div id="exercises"></div>
+
+    <script>
+        function generarNumero() {
+            return Math.floor(Math.random() * 91) + 10; // 10 a 100
+        }
+
+        function generarEjercicio() {
+            let numeros = [];
+            let positivos = [];
+            let negativos = [];
+            let operacionStr = "";
+
+            for (let i = 0; i < 10; i++) {
+                const n = generarNumero();
+                const signo = i === 0 ? "+" : (Math.random() < 0.5 ? "+" : "-");
+                const valor = signo === "+" ? n : -n;
+
+                numeros.push({ signo, valor: n, real: valor });
+
+                if (valor >= 0) positivos.push(n);
+                else negativos.push(-valor);
+
+                operacionStr += (i === 0 ? "" : " ") + signo + " " + n;
+            }
+
+            const sumaPos = positivos.reduce((a, b) => a + b, 0);
+            const sumaNeg = negativos.reduce((a, b) => a + b, 0);
+            const resultadoFinal = sumaPos - sumaNeg;
+
+            return { numeros, positivos, negativos, sumaPos, sumaNeg, resultadoFinal, operacionStr };
+        }
+
+        function generarVertical(numeros, colorClass) {
+            let html = `<div class='vertical-box ${colorClass}'>`;
+            numeros.forEach(n => {
+                html += `<div class="vertical-num">${String(n).padStart(3, " ")}</div>`;
+            });
+            html += `<div class="vertical-line"></div>`;
+            const total = numeros.reduce((a, b) => a + b, 0);
+            html += `<div class="vertical-result">${String(total).padStart(4, " ")}</div>`;
+            html += `</div>`;
+            return html;
+        }
+
+        function generar200Ejercicios() {
+            const cont = document.getElementById("exercises");
+
+            for (let i = 1; i <= 200; i++) {
+                const e = generarEjercicio();
+
+                const card = document.createElement("div");
+                card.className = "exercise";
+
+                // Crear vertical de positivos y negativos
+                const verticalHTML = `
+            <div class="boxes-wrapper" style="display:flex; flex-wrap:wrap;">
+                ${generarVertical(e.positivos, "positivos")}
+                ${generarVertical(e.negativos, "negativos")}
             </div>
-            <div class="input-group">
-                <input type="number" id="c" placeholder="Valor C">
-                <input type="number" id="d" placeholder="Valor X (desconocido)" readonly>
+        `;
+
+                card.innerHTML = `
+            <div class="operation"><strong>${i})</strong> ${e.operacionStr} = ?</div>
+            ${verticalHTML}
+            <div class="resultado-final">
+                Resultado final: ${e.resultadoFinal}
             </div>
-        </div>
+        `;
 
-        <div class="proportionality-section">
-            <p>Selecciona el tipo de proporcionalidad:</p>
-            <label>
-                <input type="radio" name="proportionality" value="direct" checked> Proporcionalidad Directa
-            </label>
-            <label>
-                <input type="radio" name="proportionality" value="inverse"> Proporcionalidad Inversa
-            </label>
-        </div>
+                cont.appendChild(card);
+            }
+        }
 
-        <button id="calculateBtn">Calcular</button>
+        generar200Ejercicios();
+    </script>
 
-        <div class="results-section">
-            <h2>Pasos del Cálculo:</h2>
-            <div id="steps"> </div>
-            <h2>Resultado:</h2>
-            <p id="result"></p>
-        </div>
-    </div>
 </body>
 
-</html-->
+</html>
