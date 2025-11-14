@@ -19,21 +19,31 @@
             text-align: center;
             color: #1d3557;
             margin-bottom: 2rem;
-            font-size: 2.2rem;
+            font-size: 2.6rem;
+            /* mayor tamaño */
+        }
+
+        /* Contenedor principal */
+        #exercises {
+            max-width: 900px;
+            /* limita ancho en pantallas grandes */
+            margin: 0 auto;
+            /* centra */
         }
 
         .exercise {
             background: white;
-            padding: 1.4rem;
-            margin-bottom: 1.8rem;
+            padding: 1.8rem;
+            margin-bottom: 2rem;
             border-radius: 12px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            font-size: 1.2rem;
+            /* letras más grandes */
         }
 
         .operation {
-            font-size: 1.1rem;
             font-weight: bold;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
             color: #1d3557;
         }
 
@@ -46,11 +56,12 @@
             display: inline-block;
             margin-bottom: 1rem;
             margin-right: 2rem;
+            min-width: 60px;
+            /* evita que números queden muy estrechos */
         }
 
         .vertical-num {
             text-align: right;
-            font-size: 1.1rem;
             padding: 2px 0;
         }
 
@@ -61,8 +72,8 @@
 
         .vertical-result {
             text-align: right;
-            font-size: 1.3rem;
             font-weight: bold;
+            font-size: 1.3rem;
         }
 
         .positivos {
@@ -73,11 +84,22 @@
             color: #b32020;
         }
 
+        .diferencia {
+            background: #fff3e0;
+            color: #f57c00;
+            border-left: 5px solid #f57c00;
+            font-size: 1.25rem;
+            margin-top: 0.7rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
         .resultado-final {
             background: #e7f0fd;
             color: #1b4f9c;
             border-left: 5px solid #1b4f9c;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             margin-top: 0.7rem;
             padding: 0.5rem 1rem;
             border-radius: 8px;
@@ -98,7 +120,7 @@
 
 <body>
 
-    <h1>200 Ejercicios de Suma</h1>
+    <h1>200 Ejercicios de Suma y Resta Vertical Separada</h1>
     <div id="exercises"></div>
 
     <script>
@@ -122,7 +144,12 @@
                 if (valor >= 0) positivos.push(n);
                 else negativos.push(-valor);
 
-                operacionStr += (i === 0 ? "" : " ") + signo + " " + n;
+                // Primer número sin signo si es positivo
+                if (i === 0 && signo === "+") {
+                    operacionStr += n;
+                } else {
+                    operacionStr += " " + signo + " " + n;
+                }
             }
 
             const sumaPos = positivos.reduce((a, b) => a + b, 0);
@@ -150,10 +177,6 @@
             for (let i = 1; i <= 200; i++) {
                 const e = generarEjercicio();
 
-                const card = document.createElement("div");
-                card.className = "exercise";
-
-                // Crear vertical de positivos y negativos
                 const verticalHTML = `
             <div class="boxes-wrapper" style="display:flex; flex-wrap:wrap;">
                 ${generarVertical(e.positivos, "positivos")}
@@ -161,9 +184,15 @@
             </div>
         `;
 
+                card = document.createElement("div");
+                card.className = "exercise";
+
                 card.innerHTML = `
             <div class="operation"><strong>${i})</strong> ${e.operacionStr} = ?</div>
             ${verticalHTML}
+            <div class="diferencia">
+                Diferencia (positivos - negativos): ${e.sumaPos} - ${e.sumaNeg} = ${e.sumaPos - e.sumaNeg}
+            </div>
             <div class="resultado-final">
                 Resultado final: ${e.resultadoFinal}
             </div>
