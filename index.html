@@ -1,210 +1,110 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
+    <title>Nos mudamos a Moodle</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicios de Suma y Resta Vertical Separada</title>
-
     <style>
         body {
-            font-family: "Inter", Arial, sans-serif;
-            background: #f4f6fa;
             margin: 0;
-            padding: 2rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #e4ecf3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             color: #333;
         }
 
-        h1 {
+        .border-wrap {
+            background: linear-gradient(135deg, #0056d2, #00b4d8);
+            padding: 2px;
+            border-radius: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 3rem 2.5rem;
+            border-radius: 18px;
             text-align: center;
-            color: #1d3557;
-            margin-bottom: 2rem;
-            font-size: 2.6rem;
-            /* mayor tamaño */
+            max-width: 420px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
         }
 
-        /* Contenedor principal */
-        #exercises {
-            max-width: 900px;
-            /* limita ancho en pantallas grandes */
-            margin: 0 auto;
-            /* centra */
+        h1 {
+            margin-top: 0;
+            font-size: 1.8rem;
+            color: #2c3e50;
         }
 
-        .exercise {
-            background: white;
-            padding: 1.8rem;
-            margin-bottom: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            font-size: 1.2rem;
-            /* letras más grandes */
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 1.2rem 0 2rem;
+            color: #555;
         }
 
-        .operation {
-            font-weight: bold;
-            margin-bottom: 1.2rem;
-            color: #1d3557;
-        }
-
-        .vertical-box {
-            font-family: "Courier New", monospace;
-            background: #fdfdfd;
-            padding: 1rem;
-            border-radius: 8px;
-            border: 1px solid #ddd;
+        a.button {
             display: inline-block;
-            margin-bottom: 1rem;
-            margin-right: 2rem;
-            min-width: 60px;
-            /* evita que números queden muy estrechos */
+            padding: 0.9rem 1.8rem;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #0056d2, #0077ff);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .vertical-num {
-            text-align: right;
-            padding: 2px 0;
+        a.button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 86, 210, 0.3);
         }
 
-        .vertical-line {
-            border-top: 3px solid #333;
-            margin: 6px 0;
+        .signature {
+            margin-top: 2.5rem;
+            font-size: 0.95rem;
+            color: #444;
         }
 
-        .vertical-result {
-            text-align: right;
-            font-weight: bold;
-            font-size: 1.3rem;
+        .signature span {
+            display: block;
+            margin-top: 0.3rem;
+            font-weight: 600;
+            color: #2c3e50;
         }
 
-        .positivos {
-            color: #2d7a2d;
-        }
-
-        .negativos {
-            color: #b32020;
-        }
-
-        .diferencia {
-            background: #fff3e0;
-            color: #f57c00;
-            border-left: 5px solid #f57c00;
-            font-size: 1.25rem;
-            margin-top: 0.7rem;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-weight: bold;
-        }
-
-        .resultado-final {
-            background: #e7f0fd;
-            color: #1b4f9c;
-            border-left: 5px solid #1b4f9c;
-            font-size: 1.25rem;
-            margin-top: 0.7rem;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-weight: bold;
-        }
-
-        @media (max-width: 700px) {
-            .boxes-wrapper {
-                display: block;
-            }
-
-            .vertical-box {
-                margin-bottom: 1rem;
-            }
+        .footer {
+            margin-top: 1.2rem;
+            font-size: 0.85rem;
+            color: #888;
         }
     </style>
 </head>
-
 <body>
 
-    <h1>200 Ejercicios de Suma y Resta Vertical Separada</h1>
-    <div id="exercises"></div>
+<div class="border-wrap">
+    <div class="card">
+        <h1>Nos mudamos a Moodle</h1>
+        <p>
+            Todo nuestro contenido ahora se encuentra en nuestra nueva
+            plataforma educativa. Haz clic abajo para continuar.
+        </p>
 
-    <script>
-        function generarNumero() {
-            return Math.floor(Math.random() * 91) + 10; // 10 a 100
-        }
+        <a class="button" href="https://moodle.nube.do" target="_blank">
+            Ir a Moodle
+        </a>
 
-        function generarEjercicio() {
-            let numeros = [];
-            let positivos = [];
-            let negativos = [];
-            let operacionStr = "";
+        <div class="signature">
+            Atentamente,
+            <span>Ing. Luis Antonio Nolasco Gómez</span>
+        </div>
 
-            for (let i = 0; i < 10; i++) {
-                const n = generarNumero();
-                const signo = i === 0 ? "+" : (Math.random() < 0.5 ? "+" : "-");
-                const valor = signo === "+" ? n : -n;
-
-                numeros.push({ signo, valor: n, real: valor });
-
-                if (valor >= 0) positivos.push(n);
-                else negativos.push(-valor);
-
-                // Primer número sin signo si es positivo
-                if (i === 0 && signo === "+") {
-                    operacionStr += n;
-                } else {
-                    operacionStr += " " + signo + " " + n;
-                }
-            }
-
-            const sumaPos = positivos.reduce((a, b) => a + b, 0);
-            const sumaNeg = negativos.reduce((a, b) => a + b, 0);
-            const resultadoFinal = sumaPos - sumaNeg;
-
-            return { numeros, positivos, negativos, sumaPos, sumaNeg, resultadoFinal, operacionStr };
-        }
-
-        function generarVertical(numeros, colorClass) {
-            let html = `<div class='vertical-box ${colorClass}'>`;
-            numeros.forEach(n => {
-                html += `<div class="vertical-num">${String(n).padStart(3, " ")}</div>`;
-            });
-            html += `<div class="vertical-line"></div>`;
-            const total = numeros.reduce((a, b) => a + b, 0);
-            html += `<div class="vertical-result">${String(total).padStart(4, " ")}</div>`;
-            html += `</div>`;
-            return html;
-        }
-
-        function generar200Ejercicios() {
-            const cont = document.getElementById("exercises");
-
-            for (let i = 1; i <= 200; i++) {
-                const e = generarEjercicio();
-
-                const verticalHTML = `
-            <div class="boxes-wrapper" style="display:flex; flex-wrap:wrap;">
-                ${generarVertical(e.positivos, "positivos")}
-                ${generarVertical(e.negativos, "negativos")}
-            </div>
-        `;
-
-                card = document.createElement("div");
-                card.className = "exercise";
-
-                card.innerHTML = `
-            <div class="operation"><strong>${i})</strong> ${e.operacionStr} = ?</div>
-            ${verticalHTML}
-            <div class="diferencia">
-                Diferencia (positivos - negativos): ${e.sumaPos} - ${e.sumaNeg} = ${e.sumaPos - e.sumaNeg}
-            </div>
-            <div class="resultado-final">
-                Resultado final: ${e.resultadoFinal}
-            </div>
-        `;
-
-                cont.appendChild(card);
-            }
-        }
-
-        generar200Ejercicios();
-    </script>
+        <div class="footer">
+            Gracias por acompañarnos 💙
+        </div>
+    </div>
+</div>
 
 </body>
-
 </html>
